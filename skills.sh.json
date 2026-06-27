@@ -1,0 +1,12 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Angular",
+      "description": "Skills for building production-quality Angular applications with Material Design 3.",
+      "skills": [
+        "angular-material-m3"
+      ]
+    }
+  ]
+}
