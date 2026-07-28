@@ -8,6 +8,13 @@
         "angular22",
         "angular-material-m3"
       ]
+    },
+    {
+      "title": "Build Tools",
+      "description": "Skills for build automation and dependency management.",
+      "skills": [
+        "maven"
+      ]
     }
   ]
 }

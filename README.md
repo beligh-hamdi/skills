@@ -37,6 +37,18 @@ Sourced directly from [material.angular.dev](https://material.angular.dev) and [
 - Auditing a codebase for hardcoded colours or border-radius values
 - Implementing accessible focus indicators or disabled states
 
+### maven
+
+Advanced Maven build automation including dependency management, multi-module projects, plugin configuration, build optimization, and troubleshooting.
+
+**Use when:**
+- Working with Maven-based projects
+- Configuring Maven plugins and dependencies
+- Optimizing build performance
+- Setting up multi-module projects
+- Troubleshooting Maven build issues
+- Integrating with CI/CD pipelines
+
 ## Install
 
 ```bash
@@ -46,4 +58,5 @@ npx skills add beligh-hamdi/skills
 # Install a specific skill
 npx skills add beligh-hamdi/skills@angular22
 npx skills add beligh-hamdi/skills@angular-material-m3
+npx skills add beligh-hamdi/skills@maven
 ```
