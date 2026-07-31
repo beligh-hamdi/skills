@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/beligh-hamdi/skills/compare/v1.0.0...v1.1.0) (2026-07-31)
+
+
+### Features
+
+* add maven skill and related documentation ([7c045bd](https://github.com/beligh-hamdi/skills/commit/7c045bd653b411dff710239faf6b2b92361871a5))
+* enhance Maven documentation with security best practices and new skills ([37a62bd](https://github.com/beligh-hamdi/skills/commit/37a62bd2cc4c2e5ab8d5df9144d797c95fcd98cb))
+* enhance Maven documentation with security best practices and new skills ([1b98b58](https://github.com/beligh-hamdi/skills/commit/1b98b58bce76276bee8fd0478c1fd2d85295bbb0))
+
 ## 1.1.0 (2026-07-30)
 
 ### Security
