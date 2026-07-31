@@ -159,6 +159,7 @@ For detailed guidance on specific Maven topics, see:
 - [Maven Wrapper](references/maven-wrapper.md) - Installation, configuration, CI/CD integration
 - [Dependency Tree](references/maven-dependency-tree.md) - Visualization, filtering, conflict resolution
 - [Dependency Resolver](references/maven-dependency-resolver.md) - Resolution process, scope matrix, conflict handling
+- [Unused Dependencies](references/maven-unused-dependencies.md) - dependency:analyze, dependency:analyze-only, cleanup strategies
 - [Effective POM](references/maven-effective-pom.md) - POM inheritance, merging rules, profile analysis
 - [Repository Management](references/maven-repository-management.md) - Repository types, mirrors, authentication, security
 - [Enforcer Plugin](references/maven-enforcer-plugin.md) - Build rules, dependency constraints, custom rules

@@ -33,9 +33,9 @@ Maven uses "nearest definition wins" for conflict resolution:
 ```xml
 <!-- Compile scope (default) -->
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <!-- No scope means compile -->
 </dependency>
 
@@ -102,9 +102,9 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 #### 3. Exclusion
 ```xml
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <exclusions>
         <exclusion>
             <groupId>org.conflicting</groupId>
@@ -119,9 +119,9 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>example-lib</artifactId>
-            <version>[1.0.0,2.0.0)</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>[3.13.0,4.0.0)</version>
         </dependency>
     </dependencies>
 </dependencyManagement>
@@ -133,9 +133,9 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 ```xml
 <!-- Exclude specific transitive dependency -->
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <exclusions>
         <exclusion>
             <groupId>org.unwanted</groupId>
@@ -146,9 +146,9 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 
 <!-- Exclude all transitive dependencies -->
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <exclusions>
         <exclusion>
             <groupId>*</groupId>
@@ -162,9 +162,9 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 ```xml
 <!-- Mark dependency as optional -->
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <optional>true</optional>
 </dependency>
 ```
@@ -191,14 +191,14 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>example-lib</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
         </dependency>
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>another-lib</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
         </dependency>
     </dependencies>
 </dependencyManagement>
@@ -226,14 +226,17 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
     <mirror>
         <id>central-mirror</id>
         <name>Central Repository Mirror</name>
-        <url>https://corporate-mirror.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <mirrorOf>central</mirrorOf>
     </mirror>
 </mirrors>
 ```
 
+**Security Warning**: Mirror overrides of `central` can redirect all dependency resolution to alternative repositories. Ensure mirrors are trusted, maintain artifact integrity verification (checksums/signing), and are properly secured. Only use mirrors from trusted sources within your organization. Replace example URLs with your actual corporate mirror URLs.
+
 ### Authentication
 ```xml
+<!-- INSECURE - Do not hardcode credentials -->
 <servers>
     <server>
         <id>private-repo</id>
@@ -241,6 +244,18 @@ mvn dependency:tree -Dincludes=group:artifact -Dverbose
         <password>password</password>
     </server>
 </servers>
+
+<!-- SECURE - Use environment variables or Maven settings -->
+<servers>
+    <server>
+        <id>private-repo</id>
+        <username>${env.REPO_USERNAME}</username>
+        <password>${env.REPO_PASSWORD}</password>
+    </server>
+</servers>
+
+<!-- Alternative: Use Maven settings.xml with encrypted master password -->
+<!-- See: https://maven.apache.org/guides/mini/guide-encryption.html -->
 ```
 
 ## Dependency Analysis
@@ -324,6 +339,18 @@ mvn dependency:tree -Dverbose
 - Use dependency constraints for Maven 3.9+
 - Consider using dependency locks for reproducibility
 
+## Security Best Practices
+- **Never hardcode credentials** in pom.xml or settings.xml
+- Use environment variables or secret managers for sensitive data
+- Enable artifact integrity verification (checksums/signing)
+- Use trusted repository mirrors only
+- Regularly audit dependencies for vulnerabilities (OWASP Dependency-Check)
+- Implement dependency locking to prevent supply chain attacks
+- Restrict repository access with proper authentication
+- Use HTTPS for all repository URLs
+- Avoid wildcard mirrorOf configurations that redirect to untrusted sources
+- Keep Maven and plugins updated for security patches
+
 ## Advanced Features
 
 ### Dependency Locking (Maven 3.9+)
@@ -338,9 +365,9 @@ mvn deploy -DdependencyLock=strict
 ### Provider Selection
 ```xml
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <type>jar</type>
 </dependency>
 ```

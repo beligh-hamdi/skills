@@ -1,8 +1,20 @@
 # beligh-hamdi/skills
 
-Agent skills for Angular development.
+Agent skills for Angular development and Maven build automation.
 
-[![skills.sh](https://skills.sh/b/beligh-hamdi/skills)](https://skills.sh/beligh-hamdi/skills)
+[![skills.sh](https://skills.sh/b/beligh-hamdi/skills)](https://www.skills.sh/beligh-hamdi/skills)
+
+## Overview
+
+This repository contains a collection of agent skills for software development, currently focusing on:
+
+- **Angular 22** - Complete reference for modern Angular development
+- **Angular Material M3** - Material Design 3 theming and components
+- **Maven** - Advanced build automation and dependency management
+
+## 🔗 Skills Repository
+
+View and install these skills at: **[https://www.skills.sh/beligh-hamdi/skills](https://www.skills.sh/beligh-hamdi/skills)**
 
 ## Available Skills
 

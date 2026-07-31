@@ -66,47 +66,52 @@ Maven repository management involves configuring repositories, mirrors, authenti
     <mirror>
         <id>central-mirror</id>
         <name>Corporate Central Mirror</name>
-        <url>https://corporate-mirror.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <mirrorOf>central</mirrorOf>
     </mirror>
     
     <mirror>
         <id>all-mirror</id>
         <name>Corporate All Mirror</name>
-        <url>https://corporate-mirror.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <mirrorOf>*</mirrorOf>
     </mirror>
 </mirrors>
 ```
+
+**Security Warning**: Only use mirrors from trusted sources within your organization. Replace example URLs with your actual corporate mirror URLs.
 
 ### Advanced Mirror Patterns
 ```xml
 <!-- Mirror specific repositories -->
 <mirror>
     <id>spring-mirror</id>
-    <url>https://corporate-mirror.com/spring</url>
+    <url>https://repo.spring.io/milestone</url>
     <mirrorOf>spring-*</mirrorOf>
 </mirror>
 
 <!-- Mirror everything except local -->
 <mirror>
     <id>external-mirror</id>
-    <url>https://corporate-mirror.com/external</url>
+    <url>https://repo.maven.apache.org/maven2</url>
     <mirrorOf>*,!local</mirrorOf>
 </mirror>
 
 <!-- Multiple repository mirror -->
 <mirror>
     <id>multi-mirror</id>
-    <url>https://corporate-mirror.com/maven2</url>
+    <url>https://repo.maven.apache.org/maven2</url>
     <mirrorOf>repo1,repo2,repo3</mirrorOf>
 </mirror>
 ```
+
+**Security Warning**: Replace example URLs with your actual corporate mirror URLs. Ensure all mirrors are trusted and verified.
 
 ## Authentication
 
 ### Server Authentication
 ```xml
+<!-- INSECURE - Do not hardcode credentials -->
 <servers>
     <server>
         <id>private-repo</id>
@@ -122,7 +127,26 @@ Maven repository management involves configuring repositories, mirrors, authenti
         <passphrase>key-passphrase</passphrase>
     </server>
 </servers>
+
+<!-- SECURE - Use environment variables or Maven settings -->
+<servers>
+    <server>
+        <id>private-repo</id>
+        <username>${env.REPO_USERNAME}</username>
+        <password>${env.REPO_PASSWORD}</password>
+    </server>
+    
+    <server>
+        <id>deploy-repo</id>
+        <username>${env.DEPLOY_USERNAME}</username>
+        <password>${env.DEPLOY_PASSWORD}</password>
+        <privateKey>${env.DEPLOY_PRIVATE_KEY}</privateKey>
+        <passphrase>${env.DEPLOY_PASSPHRASE}</passphrase>
+    </server>
+</servers>
 ```
+
+**Security Warning**: Never hardcode credentials. Use environment variables or Maven's encrypted password mechanism.
 
 ### Encrypted Passwords
 ```bash
@@ -146,34 +170,67 @@ mvn --encrypt-password
 
 ### HTTP Proxy
 ```xml
+<!-- INSECURE - Do not hardcode credentials -->
 <proxies>
     <proxy>
         <id>http-proxy</id>
         <active>true</active>
         <protocol>http</protocol>
-        <host>proxy.example.com</host>
+        <host>proxy.yourcompany.com</host>
         <port>8080</port>
         <username>proxyuser</username>
         <password>proxypass</password>
         <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
     </proxy>
 </proxies>
+
+<!-- SECURE - Use environment variables -->
+<proxies>
+    <proxy>
+        <id>http-proxy</id>
+        <active>true</active>
+        <protocol>http</protocol>
+        <host>${env.PROXY_HOST}</host>
+        <port>${env.PROXY_PORT}</port>
+        <username>${env.PROXY_USERNAME}</username>
+        <password>${env.PROXY_PASSWORD}</password>
+        <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+    </proxy>
+</proxies>
 ```
+
+**Security Warning**: Replace example hostnames with your actual proxy server. Use environment variables for credentials.
 
 ### HTTPS Proxy
 ```xml
+<!-- INSECURE - Do not hardcode credentials -->
 <proxies>
     <proxy>
         <id>https-proxy</id>
         <active>true</active>
         <protocol>https</protocol>
-        <host>proxy.example.com</host>
+        <host>proxy.yourcompany.com</host>
         <port>8443</port>
         <username>proxyuser</username>
         <password>proxypass</password>
     </proxy>
 </proxies>
+
+<!-- SECURE - Use environment variables -->
+<proxies>
+    <proxy>
+        <id>https-proxy</id>
+        <active>true</active>
+        <protocol>https</protocol>
+        <host>${env.HTTPS_PROXY_HOST}</host>
+        <port>${env.HTTPS_PROXY_PORT}</port>
+        <username>${env.HTTPS_PROXY_USERNAME}</username>
+        <password>${env.HTTPS_PROXY_PASSWORD}</password>
+    </proxy>
+</proxies>
 ```
+
+**Security Warning**: Replace example hostnames with your actual proxy server. Use environment variables for credentials.
 
 ## Repository Plugins
 
@@ -183,15 +240,17 @@ mvn --encrypt-password
     <repository>
         <id>releases-repo</id>
         <name>Releases Repository</name>
-        <url>https://corporate-repo.com/releases</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     <snapshotRepository>
         <id>snapshots-repo</id>
         <name>Snapshots Repository</name>
-        <url>https://corporate-repo.com/snapshots</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </snapshotRepository>
 </distributionManagement>
 ```
+
+**Security Warning**: Replace with your actual corporate repository URLs. Ensure proper authentication and security measures are in place.
 
 ### Site Deployment
 ```xml
@@ -212,15 +271,17 @@ mvn --encrypt-password
     <repository>
         <id>nexus-releases</id>
         <name>Nexus Releases</name>
-        <url>https://nexus.example.com/repository/maven-releases</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     <repository>
         <id>nexus-snapshots</id>
         <name>Nexus Snapshots</name>
-        <url>https://nexus.example.com/repository/maven-snapshots</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
 </repositories>
 ```
+
+**Security Warning**: Replace with your actual Nexus repository URLs. Ensure proper authentication and security measures are in place.
 
 ### Artifactory Configuration
 ```xml
@@ -228,15 +289,17 @@ mvn --encrypt-password
     <repository>
         <id>artifactory-releases</id>
         <name>Artifactory Releases</name>
-        <url>https://artifactory.example.com/artifactory/libs-release-local</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     <repository>
         <id>artifactory-snapshots</id>
         <name>Artifactory Snapshots</name>
-        <url>https://artifactory.example.com/artifactory/libs-snapshot-local</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
 </repositories>
 ```
+
+**Security Warning**: Replace with your actual Artifactory repository URLs. Ensure proper authentication and security measures are in place.
 
 ## Repository Best Practices
 
@@ -246,7 +309,7 @@ mvn --encrypt-password
     <!-- Most specific first -->
     <repository>
         <id>corporate-internal</id>
-        <url>https://corporate-repo.com/internal</url>
+        <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     
     <!-- Then specific third-party -->
@@ -263,11 +326,13 @@ mvn --encrypt-password
 </repositories>
 ```
 
+**Security Warning**: Replace example URLs with your actual corporate repository URLs. Ensure proper authentication and security measures are in place.
+
 ### Snapshot Policies
 ```xml
 <repository>
     <id>snapshots-repo</id>
-    <url>https://repo.example.com/snapshots</url>
+    <url>https://repo.maven.apache.org/maven2</url>
     <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -275,6 +340,8 @@ mvn --encrypt-password
     </snapshots>
 </repository>
 ```
+
+**Security Warning**: Replace with your actual snapshot repository URL. Ensure proper authentication and security measures are in place.
 
 ### Update Policies
 ```xml
@@ -342,7 +409,7 @@ mvn dependency:resolve -X | grep mirror
 ```xml
 <repository>
     <id>strict-repo</id>
-    <url>https://repo.example.com/maven2</url>
+    <url>https://repo.maven.apache.org/maven2</url>
     <releases>
         <checksumPolicy>fail</checksumPolicy>
     </releases>
@@ -351,6 +418,8 @@ mvn dependency:resolve -X | grep mirror
     </snapshots>
 </repository>
 ```
+
+**Security Warning**: Replace example URLs with your actual corporate repository URLs. Ensure proper authentication and security measures are in place.
 
 ### Repository Signing
 ```bash

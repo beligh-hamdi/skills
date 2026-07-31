@@ -100,24 +100,26 @@ Configure mirrors for faster dependency resolution:
     <mirror>
         <id>central-mirror</id>
         <name>Central Repository Mirror</name>
-        <url>https://corporate-mirror.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <mirrorOf>central</mirrorOf>
     </mirror>
     <mirror>
         <id>all-mirror</id>
         <name>All Repositories Mirror</name>
-        <url>https://corporate-mirror.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <mirrorOf>*</mirrorOf>
     </mirror>
 </mirrors>
 ```
+
+**Security Warning**: Replace example URLs with your actual corporate mirror URLs. Only use mirrors from trusted sources within your organization.
 
 ### Repository Optimization
 ```xml
 <repositories>
     <repository>
         <id>fast-repo</id>
-        <url>https://fast-repo.com/maven2</url>
+        <url>https://repo.maven.apache.org/maven2</url>
         <releases>
             <enabled>true</enabled>
             <updatePolicy>never</updatePolicy>
@@ -129,14 +131,16 @@ Configure mirrors for faster dependency resolution:
 </repositories>
 ```
 
+**Security Warning**: Replace example URLs with your actual corporate repository URLs. Ensure proper authentication and security measures are in place.
+
 ## Dependency Resolution Optimization
 
 ### Minimal Dependencies
 ```xml
 <dependency>
-    <groupId>org.example</groupId>
-    <artifactId>example-lib</artifactId>
-    <version>1.0.0</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
     <type>jar</type>
     <scope>compile</scope>
     <optional>false</optional>
